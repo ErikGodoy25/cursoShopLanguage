@@ -6,9 +6,19 @@ async function linguagemListaTodos() {
 }
 
 async function linguagemListaUm(id) {
-    return await linguagem.findByPk(id)
-}
+    const one = await linguagem.findByPk(id)
 
+    const newLanguage = {
+        id: one.id_liguagem,
+        nome: one.nome_linguagem,
+        status: one.status_linguagem,
+        tipo: one.tipo_linguagem,
+        usuario: 9999,
+        qtdPlanosFront: (await one.getPlanosFront()).length,
+        qtdPlanosBack: (await one.getPlanosBack()).length
+    }
+    return newLanguage
+}
 async function incluirNovaLinguagem(novaLinguagem) {
     novaLinguagem['data_inclusao_linguagem'] = moment.utc().local().toDate()
     return await linguagem.create(novaLinguagem)
@@ -16,7 +26,7 @@ async function incluirNovaLinguagem(novaLinguagem) {
 
 async function editarLinguagem(alterar, id) {
     await linguagem.update(alterar, { where: { id_linguagem: id } })
-    return await language.findByPk(id)
+    return await linguagem.findByPk(id)
 }
 
 async function deletaLinguagem(id) {
@@ -27,7 +37,8 @@ const service = {
     linguagemListaTodos: () => linguagemListaTodos(),
     linguagemListaUm: (id) => linguagemListaUm(id),
     incluirNovaLinguagem: (novaLinguagem) => incluirNovaLinguagem(novaLinguagem),
-    editarLinguagem: (alterar, id) => editarLinguagem(alterar, id)
+    editarLinguagem: (alterar, id) => editarLinguagem(alterar, id),
+    deletaLinguagem: (id) => deletaLinguagem(id)
 }
 
 export default service;

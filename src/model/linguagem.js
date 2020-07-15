@@ -3,7 +3,7 @@ import config from '../config/configDb';
 
 const db = new sequelize(config);
 
-module.exports = db.define('linguagem', {
+const linguagem = db.define('linguagem', {
     id_linguagem: {
         field: 'id_linguagem',
         type: sequelize.NUMBER,
@@ -34,3 +34,5 @@ module.exports = db.define('linguagem', {
         freezeTableName: true,
         timestamps: false
     })
+
+export default linguagem

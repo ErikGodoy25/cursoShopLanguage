@@ -24,7 +24,7 @@ router.put('/linguagem/:id', async (req, res) => {
 });
 
 router.delete('/linguagem/:id', async (req, res) => {
-    await linguagemService.deltaLinguagem(req.params['id'])
+    await linguagemService.deletaLinguagem(req.params['id'])
     res.status(200).json()
 });
 
