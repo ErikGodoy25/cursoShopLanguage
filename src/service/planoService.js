@@ -1,3 +1,4 @@
+import moment from 'moment'
 import plano from './../model/plano'
 
 
@@ -19,9 +20,27 @@ async function listaPlanosAll() {
     }))
     return newList
 }
+async function listaPlano(id) {
+    const one = await plano.findByPk(id)
+}
+async function incluiNovoPlano(newPlano) {
+    newPlano['data_inclusao_plano'] = moment.utc().local().toDate()
+    return await plano.create(newPlano)
+}
+async function editarPlano(alterar, id) {
+    await plano.update(alterar, { where: { id_plano: id } })
+    return await plano.findByPk(id)
+}
+async function deletaPlano(id) {
+    await plano.destroy({ where: { id_plano: id } })
+}
 
 const service = {
-    listaPlanosAll: () => listaPlanosAll()
+    listaPlanosAll: () => listaPlanosAll(),
+    listaPlano: () => listaPlano(),
+    incluiNovoPlano: (newPlano) => incluiNovoPlano(newPlano),
+    editarPlano: (alterar, id) => editarPlano(alterar, id),
+    deletaPlano: (id) => deletaPlano(id)
 }
 
 export default service
