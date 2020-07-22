@@ -3,7 +3,7 @@ import config from '../config/configDb';
 
 const db = new sequelize(config);
 
-module.exports = db.define('usuario', {
+const usuario = db.define('usuario', {
     id: {
         field: 'id_usuario',
         type: sequelize.NUMBER,
@@ -38,3 +38,5 @@ module.exports = db.define('usuario', {
         freezeTableName: true,
         timestamps: false
     })
+
+export default usuario

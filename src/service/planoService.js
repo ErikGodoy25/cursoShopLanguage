@@ -1,9 +1,9 @@
-import moment from 'moment'
-import plano from './../model/plano'
+import moment from 'moment';
+import plano from './../model/plano';
 
 
 async function listaPlanosAll() {
-    const lista = await plano.findAll()
+    const lista = await plano.findAll();
 
     const newList = Promise.all(lista.map(async item => {
         const novoItem = {
@@ -21,15 +21,15 @@ async function listaPlanosAll() {
     return newList
 }
 async function listaPlano(id) {
-    const one = await plano.findByPk(id)
+    return await plano.findByPk(id);
 }
 async function incluiNovoPlano(newPlano) {
     newPlano['data_inclusao_plano'] = moment.utc().local().toDate()
-    return await plano.create(newPlano)
+    return await plano.create(newPlano);
 }
 async function editarPlano(alterar, id) {
     await plano.update(alterar, { where: { id_plano: id } })
-    return await plano.findByPk(id)
+    return await plano.findByPk(id);
 }
 async function deletaPlano(id) {
     await plano.destroy({ where: { id_plano: id } })
@@ -37,7 +37,7 @@ async function deletaPlano(id) {
 
 const service = {
     listaPlanosAll: () => listaPlanosAll(),
-    listaPlano: () => listaPlano(),
+    listaPlano: (id) => listaPlano(id),
     incluiNovoPlano: (newPlano) => incluiNovoPlano(newPlano),
     editarPlano: (alterar, id) => editarPlano(alterar, id),
     deletaPlano: (id) => deletaPlano(id)

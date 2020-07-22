@@ -17,4 +17,5 @@ const itemProposta = db.define('item_proposta', {
         freezeTableName: true,
         timestamps: false
     })
+
 export default itemProposta 

@@ -8,22 +8,22 @@ router.get('/planos', async (req, res) => {
     res.status(200).json(retorno)
 });
 
-router.get('/planos/:id', async (req, res) => {
+router.get('/plano/:id', async (req, res) => {
     const retorno = await planoService.listaPlano(req.params['id'])
     res.status(200).json(retorno)
 });
 
-router.post('/planos', async (req, res) => {
+router.post('/plano', async (req, res) => {
     const retorno = await planoService.incluiNovoPlano(req.body)
     res.status(201).json(retorno)
 });
 
-router.put('/planos/:id', async (req, res) => {
+router.put('/plano/:id', async (req, res) => {
     const retorno = await planoService.editarPlano(req.body, req.params['id'])
     res.status(200).json(retorno)
 });
 
-router.delete('/planos/:id', async (req, res) => {
+router.delete('/plano/:id', async (req, res) => {
     await planoService.deletaPlano(req.params['id'])
     res.status(200).json()
 });
